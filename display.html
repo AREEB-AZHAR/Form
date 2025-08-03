@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Info</title>
+  <style>
+    body { background-color: #e6ffe6; font-family: Arial; padding: 20px; }
+    table { border-collapse: collapse; width: 80%; margin: auto;border: green solid; }
+    td, th { border: 1px solid green; padding: 10px; }
+    th { background-color: #c1f0c1; }
+    .btn { margin-top: 20px; display: block; text-align: center; user-select: none;}
+    h1{text-align: center;background: teal;font-style: italic; color: #c1f0c1;}
+    
+  </style>
+</head>
+<body>
+  <h1>User Information</h1>
+  <table id="infoTable" style="display: none;">
+    <tr><th>Name</th><td id="name"></td></tr>
+    <tr><th>Father Name</th><td id="fname"></td></tr>
+    <tr><th>Department</th><td id="dept"></td></tr>
+    <tr><th>Date of Birth</th><td id="dob"></td></tr>
+    <tr><th>Age</th><td id="age"></td></tr>
+    <tr><th>Email</th><td id="email"></td></tr>
+    <tr><th>Phone</th><td id="phone"></td></tr>
+  </table>
+  <div class="btn">
+    <a href="update.html">Update Info</a>
+  </div>
+
+  <script>
+    const data = JSON.parse(localStorage.getItem('userData'));
+
+    if (data) {
+      document.getElementById('name').textContent = data.name;
+      document.getElementById('fname').textContent = data.fname;
+      document.getElementById('dept').textContent = data.dept;
+      document.getElementById('dob').textContent = data.dob;
+      document.getElementById('age').textContent = data.age;
+      document.getElementById('email').textContent = data.email;
+      document.getElementById('phone').textContent = data.phone;
+      document.getElementById('infoTable').style.display = 'table';
+    } else {
+      document.body.innerHTML += "<p>No data found. Please go to <a href='form.html'>form page</a> first.</p>";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Update Info</title>
+  <style>
+    body { background-color: #fff0f5; font-family: Arial; padding: 20px; }
+    label { display: block; margin: 10px 0 5px; }
+    input { padding: 5px; width: 250px; }
+    .btn { margin-top: 20px; padding: 10px 15px; }
+    h1{text-align: center;background: rgb(241, 193, 229);font-style: italic;color: #de1c5d;}
+    form{border: 2px solid gray;
+        box-shadow: 2px seagreen;
+        text-align: left;padding: 10px;}
+  </style>
+</head>
+<body>
+  <h1>Update Your Information</h1>
+  <form id="updateForm">
+    
+    <label>Name:</label>
+    <input type="text" id="name" required>
+
+    <label>Father Name:</label>
+    <input type="text" id="fname" placeholder="Enter your Father name">
+
+    <label>Department:</label>
+    <input type="text" id="dept" placeholder="Enter your Department">
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob" required><br><br>
+    <div style="color:#de1c5d;">Age: <span id="age">0</span></div>
+
+    <label>Email:</label>
+    <input type="email" id="email" required>
+
+    <label>Phone:</label>
+    <input type="tel" id="phone" required>
+
+    <button type="submit" class="btn">Save Changes</button>
+  </form>
+
+  <script>
+    const dobInput = document.getElementById('dob');
+    const ageDisplay = document.getElementById('age');
+    const storedData = JSON.parse(localStorage.getItem('userData'));
+
+    if (storedData) {
+      document.getElementById('name').value = storedData.name;
+      document.getElementById('fname').value = storedData.fname;
+      document.getElementById('dept').value = storedData.dept;
+      document.getElementById('dob').value = storedData.dob;
+      document.getElementById('email').value = storedData.email;
+      document.getElementById('phone').value = storedData.phone;
+      ageDisplay.textContent = storedData.age;
+    }
+
+    dobInput.addEventListener('input', () => {
+      const dob = new Date(dobInput.value);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      ageDisplay.textContent = age;
+    });
+
+    document.getElementById('updateForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const updatedData = {
+        name: document.getElementById('name').value,
+        fname: document.getElementById('fname').value,
+        dept:document.getElementById('dept').value,
+        dob: document.getElementById('dob').value,
+        age: document.getElementById('age').textContent,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value
+      };
+      localStorage.setItem('userData', JSON.stringify(updatedData));
+      window.location.href = "display.html";
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>User Form</title>
+  <style>
+    body { background-color: #85c6ff; font-family: Arial; padding: 20px; }
+    label { display: block; margin: 10px 0 5px; }
+    input { padding: 3px; width: 250px; }
+    form{border: 2px solid rgb(11, 169, 237);
+        box-shadow: 2px seagreen;
+        text-align: left;padding: 10px;}
+    .btn { margin-top: 20px; padding: 10px 15px; }
+    h1{text-align: center;background: rgb(186, 255, 255);font-style: italic; color: #1189f3;}
+  </style>
+</head>
+<body>
+  <h1>Enter Your Information</h1>
+  <form id="userForm">
+    <label>Name:</label>
+    <input type="text" id="name" required placeholder="Enter your name">
+
+    <label>Father Name:</label>
+    <input type="text" id="fname" placeholder="Enter your Father name">
+
+    <label>Department:</label>
+    <input type="text" id="dept" placeholder="Enter your Department">
+
+    <label>Date of Birth:</label>
+    <input type="date" id="dob" required><br><br>
+    <div>Age: <span id="age">0</span></div>
+
+    <label>Email:</label>
+    <input type="email" id="email" required placeholder="GOOGLE@gmail.com">
+
+    <label>Phone:</label>
+    <input type="tel" id="phone" required placeholder="0300 0000000">
+<br>
+    <button type="submit" class="btn">Submit</button>
+  </form>
+
+  <script>
+    const dobInput = document.getElementById('dob');
+    const ageDisplay = document.getElementById('age');
+
+    dobInput.addEventListener('input', () => {
+      const dob = new Date(dobInput.value);
+      const today = new Date();
+      let age = today.getFullYear() - dob.getFullYear();
+      const m = today.getMonth() - dob.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+        age--;
+      }
+      ageDisplay.textContent = age;
+    });
+
+    document.getElementById('userForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const userData = {
+        name: document.getElementById('name').value,
+        fname: document.getElementById('fname').value,
+        dept:document.getElementById('dept').value,
+        dob: document.getElementById('dob').value,
+        age: document.getElementById('age').textContent,
+        email: document.getElementById('email').value,
+        phone: document.getElementById('phone').value
+      };
+      localStorage.setItem('userData', JSON.stringify(userData));
+      window.location.href = "display.html";
+    });
+  </script>
+</body>
+</html>
