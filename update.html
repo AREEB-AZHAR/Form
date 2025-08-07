@@ -39,46 +39,6 @@
     <button type="submit" class="btn">Save Changes</button>
   </form>
 
-  <script>
-    const dobInput = document.getElementById('dob');
-    const ageDisplay = document.getElementById('age');
-    const storedData = JSON.parse(localStorage.getItem('userData'));
-
-    if (storedData) {
-      document.getElementById('name').value = storedData.name;
-      document.getElementById('fname').value = storedData.fname;
-      document.getElementById('dept').value = storedData.dept;
-      document.getElementById('dob').value = storedData.dob;
-      document.getElementById('email').value = storedData.email;
-      document.getElementById('phone').value = storedData.phone;
-      ageDisplay.textContent = storedData.age;
-    }
-
-    dobInput.addEventListener('input', () => {
-      const dob = new Date(dobInput.value);
-      const today = new Date();
-      let age = today.getFullYear() - dob.getFullYear();
-      const m = today.getMonth() - dob.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
-        age--;
-      }
-      ageDisplay.textContent = age;
-    });
-
-    document.getElementById('updateForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const updatedData = {
-        name: document.getElementById('name').value,
-        fname: document.getElementById('fname').value,
-        dept:document.getElementById('dept').value,
-        dob: document.getElementById('dob').value,
-        age: document.getElementById('age').textContent,
-        email: document.getElementById('email').value,
-        phone: document.getElementById('phone').value
-      };
-      localStorage.setItem('userData', JSON.stringify(updatedData));
-      window.location.href = "display.html";
-    });
-  </script>
+  
 </body>
 </html>
