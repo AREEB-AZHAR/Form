@@ -26,22 +26,5 @@
   <div class="btn">
     <a href="update.html">Update Info</a>
   </div>
-
-  <script>
-    const data = JSON.parse(localStorage.getItem('userData'));
-
-    if (data) {
-      document.getElementById('name').textContent = data.name;
-      document.getElementById('fname').textContent = data.fname;
-      document.getElementById('dept').textContent = data.dept;
-      document.getElementById('dob').textContent = data.dob;
-      document.getElementById('age').textContent = data.age;
-      document.getElementById('email').textContent = data.email;
-      document.getElementById('phone').textContent = data.phone;
-      document.getElementById('infoTable').style.display = 'table';
-    } else {
-      document.body.innerHTML += "<p>No data found. Please go to <a href='form.html'>form page</a> first.</p>";
-    }
-  </script>
 </body>
 </html>
